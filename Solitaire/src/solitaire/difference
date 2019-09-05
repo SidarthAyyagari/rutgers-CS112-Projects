@@ -1,0 +1,300 @@
+113,128c113,128
+< 	void jokerB() {
+< 		CardNode prev = deckRear;
+< 		CardNode ptr = prev.next;
+< 		CardNode next = ptr.next;
+< 		CardNode last = next.next;
+< 
+< 		while(ptr.cardValue != 28) {
+< 			prev = prev.next;
+< 			ptr = ptr.next;
+< 			next = next.next;
+< 			last = last.next; }
+< 
+< 		//case 1: joker is the third to last card in deck
+< 		if (last.cardValue == deckRear.cardValue){
+< 			deckRear = ptr;		}
+< 		//case2: joker is the second to last
+---
+> 	void jokerB() { 
+> 		CardNode prev = deckRear; 
+> 		CardNode ptr = prev.next; 
+> 		CardNode next = ptr.next; 
+> 		CardNode last = next.next;  
+> 
+> 		while(ptr.cardValue != 28){ 
+> 			prev = prev.next; 
+> 			ptr = ptr.next; 
+> 			next = next.next; 
+> 			last = last.next; }  
+> 
+> 		//case 1: joker is the third to last card in deck 
+> 		if (last.cardValue == deckRear.cardValue){ 
+> 			deckRear = ptr; 	}
+> 		//case2: joker is the second to last 
+132c132
+< 		//case 3: joker is the last card
+---
+> 		//case 3: joker is the last card 
+136,154c136,154
+< 		//swap once
+< 		prev.next = next;
+< 		next.next = ptr;
+< 		ptr.next = last;
+< 		//reset refernce nodes
+< 		prev = next;
+< 		next = last;
+< 		last = next.next;
+< 		//swap again
+< 		prev.next = next;
+< 		next.next = ptr;
+< 		ptr.next = last;
+< 
+<         return;}
+< 
+< 
+< 	/**
+< 	 * Implements Step 3 - Triple Cut - on the deck.
+< 	 */
+---
+> 		//swap once 
+> 		prev.next = next; 
+> 		next.next = ptr; 
+> 		ptr.next = last;  
+> 		//reset refernce nodes 
+> 		prev = next; 
+> 		next = last; 
+> 		last = next.next;  
+> 		//swap again 
+> 		prev.next = next; 
+> 		next.next = ptr; 
+> 		ptr.next = last;  
+> 
+> 		return; } 
+> 
+> 
+> 		/**
+>          * Implements Step 3 - Triple Cut - on the deck.
+>          */
+157,164c157,176
+< 		CardNode head = deckRear.next;
+< 		CardNode tail = deckRear;
+< 		CardNode ptr = deckRear.next;
+< 		CardNode prev = deckRear;
+< 		CardNode newhead;
+< 		CardNode newtail;
+< 		CardNode ptrA;
+< 		CardNode ptrB;    //if joker is in beginning and end, then exit
+---
+> 		CardNode head = deckRear.next; 
+> 		CardNode tail = deckRear;  
+> 		CardNode ptr = deckRear.next; 
+> 		CardNode prev = deckRear;   
+> 		CardNode newhead; 
+> 		CardNode newtail; 
+> 		CardNode ptrA; 
+> 		CardNode ptrB;  	//if joker is in beginning and end, then exit 
+> 
+> 		if((tail.cardValue == 27 || tail.cardValue == 28) && (head.cardValue == 27 || head.cardValue == 28)){ 
+> 			return; 	}  
+> 
+> 		//move 
+> 		while(ptr.cardValue != 27 && ptr.cardValue != 28){ 
+> 			ptr = ptr.next; 
+> 			prev = prev.next; }  
+> 
+> 		ptrA = ptr; 
+> 		newtail = prev;  
+> 		ptr = ptr.next;  
+166,172c178,179
+< 		if ((tail.cardValue == 27 || tail.cardValue == 28) && (head.cardValue == 27 || head.cardValue == 28)){
+< 			return;	}
+< 
+< 		//move
+< 		while (ptr.cardValue != 27 && ptr.cardValue != 28){
+< 			ptr = ptr.next;
+< 			prev = prev.next;}
+---
+> 		while(ptr.cardValue != 27 && ptr.cardValue != 28){ 
+> 			ptr = ptr.next; 	}  
+174,176c181,182
+< 		ptrA = ptr;
+< 		newtail = prev;
+< 		ptr = ptr.next;
+---
+> 		ptrB = ptr; 
+> 		newhead = ptrB.next;  
+178,184c184
+< 		while (ptr.cardValue != 27 && ptr.cardValue != 28){
+< 			ptr = ptr.next; }
+< 
+< 		ptrB = ptr;
+< 		newhead = ptrB.next;
+< 
+< 		//check if:		//head is a joker
+---
+> 		//check if: 	//head is a joker 
+188,197c188,197
+< 		//tail is a joker
+< 		else if (tail.cardValue == 27 || tail.cardValue == 28){
+< 			deckRear = prev;}
+<         else{
+< 			tail.next = ptrA;
+< 			ptrB.next = head;
+< 			newtail.next = newhead;
+< 			deckRear = newtail;     }
+<         
+< 		return;
+---
+> 		//tail is a joker 
+> 		else if(tail.cardValue == 27 || tail.cardValue == 28){
+> 			deckRear = prev; }
+> 		else{
+> 			 tail.next = ptrA;
+> 			 ptrB.next = head; 
+> 			newtail.next = newhead; 
+> 			deckRear = newtail; 	}  
+> 
+> 		return; 
+205,211c205,211
+< 		CardNode ptr = deckRear.next;
+< 		CardNode prev;
+< 		CardNode head;
+< 		if(deckRear.cardValue == 28 || deckRear.cardValue == 27){
+< 			return;}
+< 		for(int i = 1; i<deckRear.cardValue; i++){
+< 			ptr = ptr.next;}
+---
+> 		CardNode ptr = deckRear.next; 
+> 		CardNode prev; 
+> 		CardNode head;  
+> 		if(deckRear.cardValue == 28 || deckRear.cardValue == 27){ 
+> 			return; 	}  
+> 		for(int i = 1; i<deckRear.cardValue; i++){ 
+> 			ptr = ptr.next; 	}  
+213,214c213,214
+< 		head = ptr.next;
+< 		prev = ptr;
+---
+> 		head = ptr.next; 
+> 		prev = ptr;  
+217c217
+< 			prev = prev.next;}
+---
+> 			prev = prev.next; }  
+219,220c219,220
+< 		prev.next = deckRear.next;
+< 		deckRear.next = head;
+---
+> 		prev.next = deckRear.next; 
+> 		deckRear.next = head; 
+235,240c235,240
+< 		int key;
+< 		do{
+< 			jokerA();
+< 			jokerB();
+< 			tripleCut();
+< 			countCut();
+---
+> 		int key;  
+> 		do{ 
+> 			jokerA(); 
+> 			jokerB(); 
+> 			tripleCut(); 
+> 			countCut();   
+242,243c242,243
+< 			CardNode head = deckRear.next;
+< 			CardNode ptr = head;
+---
+> 			CardNode head = deckRear.next; 
+> 			CardNode ptr = head;  
+245,246c245,246
+< 			if(head.cardValue == 27 || head.cardValue == 28){
+< 				key = deckRear.cardValue;}
+---
+> 			if(head.cardValue == 27 || head.cardValue == 28){ 
+> 				key = deckRear.cardValue; }
+248,249c248,249
+< 					for(int i = 0; i<head.cardValue; i++){
+< 						ptr = ptr.next; }
+---
+> 				for(int i = 0; i<head.cardValue; i++){ 
+> 					ptr = ptr.next; 	} 
+251,252c251
+< 					key = ptr.cardValue;}
+< 			} while (key>26);
+---
+> 				key = ptr.cardValue; } 
+254c253,255
+< 	    return key;
+---
+> 		} while(key>26);  
+> 
+> 		return key;
+285,297c286,298
+< 		String temp = "";
+< 		for(int i = 0; i<message.length(); i++){
+< 				if(Character.isLetter(message.charAt(i))){
+< 						temp = temp + message.charAt(i); }		}
+< 
+< 			String encryptedmsg = "";
+< 
+< 			for(int i = 0; i<temp.length(); i++){
+< 				int ch = temp.charAt(i) - 'A' + 1;
+< 				int k = getKey();
+< 				int e = ch + k;
+< 				while(e > 26){
+< 					e = e - 26; }
+---
+> 		String temp = "";  
+> 		for(int i = 0; i<message.length(); i++){ 
+> 			if(Character.isLetter(message.charAt(i))){ 
+> 				temp = temp + message.charAt(i); } 	}  
+> 
+> 		String encryptedmsg = "";  
+> 
+> 		for(int i = 0; i<temp.length(); i++){ 
+> 			int ch = temp.charAt(i) - 'A' + 1; 
+> 			int k = getKey(); 
+> 			int e = ch + k;   
+> 			while(e > 26){ 
+> 				e = e - 26;  }  
+299c300
+< 				encryptedmsg = encryptedmsg + (char)(e-1 + 'A');		}
+---
+> 			encryptedmsg = encryptedmsg + (char)(e-1 + 'A'); 	}  
+301,302c302,303
+< 			return encryptedmsg;
+< 		}
+---
+> 		return encryptedmsg;
+> 	}
+314,321c315,320
+< 		String decryptedmsg = "";
+< 		for(int i = 0; i<message.length(); i++){
+< 			int e = message.charAt(i) - 'A' + 1;
+< 			int k = getKey();
+< 			while(e<=k){
+< 				e = e + 26; }
+< 
+< 			int c = e - k;
+---
+> 		String decryptedmsg = "";  
+> 		for(int i = 0; i<message.length(); i++){ 
+> 			int e = message.charAt(i) - 'A' + 1; 
+> 			int k = getKey();  
+> 			while(e<=k){ 
+> 				e = e + 26; 	}  
+323,326c322
+< 			decryptedmsg = decryptedmsg + (char)(c -1 + 'A');}
+< 
+< 		return decryptedmsg;
+< 		}
+---
+> 			int c = e - k; 
+327a324
+> 			decryptedmsg = decryptedmsg + (char)(c -1 +'A'); }  
+328a326
+> 		return decryptedmsg; 
+329a328
+> }
